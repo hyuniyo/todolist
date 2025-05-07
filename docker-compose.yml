@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: todolist-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: todolist
+      MYSQL_USER: todo5
+      MYSQL_PASSWORD: todo1234!
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+
+  springboot:
+    build:
+      context: .  # Dockerfile이 있는 프로젝트 루트
+    container_name: todolist-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mariadb  # DB 먼저 켜짐
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/todolist
+      SPRING_DATASOURCE_USERNAME: todo5
+      SPRING_DATASOURCE_PASSWORD: todo1234!
+    restart: always
+
+volumes:
+  db_data:

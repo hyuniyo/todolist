@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass // 상속받는 클래스가 이 필드를 그대로 DB 테이블에 포함
 @EntityListeners(AuditingEntityListener.class) // createdAt, updatedAt 자동 관리
-public abstract class BaseEntity {
+public abstract class BaseEntity { //abstract는 객체 생성이 안되고 하면 안되니까 BaseEntity는 abstract로 한다
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT처럼 자동 번호 증가
