@@ -24,6 +24,7 @@ services:
     depends_on:
       - mariadb  # DB 먼저 켜짐
     environment:
+      SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/todolist
       SPRING_DATASOURCE_USERNAME: todo5
       SPRING_DATASOURCE_PASSWORD: todo1234!
