@@ -23,6 +23,7 @@ public class ToDoDto {
 
     public static ToDoDto fromEntity(ToDoEntity entity) {
         return ToDoDto.builder()
+                .id(entity.getId())
                 .title(entity.getTitle())
                 .startDate(entity.getStartDate())
                 .dueDate(entity.getDueDate())

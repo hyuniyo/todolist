@@ -59,6 +59,17 @@ public class ToDoService {
                         () -> new IllegalArgumentException("해당 할 일이 존재하지 않습니다. id=" + id));
 
         todo.softDelete();
+        toDoRepository.save(todo);
+    }
+
+    @Transactional //toDoRepository.save() 이런 코드를 쓰지 않아도 entity의 영속성을 이용하여 자동으로 저장되게 할 수 있도록 하는 애너테이션
+    public void markAsCompleted(Long id){
+        ToDoEntity todo = toDoRepository.findById(id)
+                .orElseThrow(
+                        () -> new IllegalArgumentException("해당 할 일이 존재하지 않습니다. id=" + id));
+
+        todo.markAsComplete();
+        toDoRepository.save(todo);
     }
 
 }
