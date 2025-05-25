@@ -33,4 +33,10 @@ public class ToDoEntity extends BaseEntity {
     private Boolean isDeleted = false;
     // 소프트 삭제용 필드. 삭제 시 DB에서 지우는 대신 true로 바꿈
     // 기본값 false로 설정
+
+    public void update(String title, LocalDateTime startDate, LocalDateTime dueDate) {
+        this.title = title;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
+    }
 }

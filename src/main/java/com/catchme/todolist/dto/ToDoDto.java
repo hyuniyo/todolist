@@ -15,6 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class ToDoDto {
+    private Long id;
     private String title;
     private LocalDateTime startDate;
     private LocalDateTime dueDate;
