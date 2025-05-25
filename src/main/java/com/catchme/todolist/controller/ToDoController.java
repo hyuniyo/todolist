@@ -44,8 +44,8 @@ public class ToDoController {
     //noContent - 204(내용 없음) 반환 build - 응답 자체를 최종적으로 만들어줘~ 이 느
 
     @PatchMapping("/{id}/complete")
-    public ResponseEntity<Void> markAsCompleted(@PathVariable Long id) {
-        toDoService.markAsCompleted(id);
+    public ResponseEntity<Void> toggleComplete(@PathVariable Long id) {
+        toDoService.toggleTodoCompletion(id);
         return ResponseEntity.noContent().build();
     }
 }

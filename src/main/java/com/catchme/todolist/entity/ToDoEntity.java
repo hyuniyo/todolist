@@ -45,7 +45,7 @@ public class ToDoEntity extends BaseEntity {
     }
 
 
-    public void markAsComplete() {
-        this.isCompleted = true;
+    public void toggleCompletion() {
+        this.isCompleted = !this.isCompleted;
     }
 }
