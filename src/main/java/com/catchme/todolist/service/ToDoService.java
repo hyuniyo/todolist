@@ -51,6 +51,16 @@ public class ToDoService {
         todo.update(dto.getTitle(), dto.getStartDate(), dto.getDueDate());
         return todo;
     }
+
+    @Transactional
+    public void deleteTodo(Long id){
+        ToDoEntity todo = toDoRepository.findById(id)
+                .orElseThrow(
+                        () -> new IllegalArgumentException("해당 할 일이 존재하지 않습니다. id=" + id));
+
+        todo.softDelete();
+    }
+
 }
 
 

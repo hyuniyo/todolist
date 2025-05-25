@@ -39,4 +39,10 @@ public class ToDoEntity extends BaseEntity {
         this.startDate = startDate;
         this.dueDate = dueDate;
     }
+
+    public void softDelete() {
+        this.isDeleted = true;
+    }
+
+
 }
