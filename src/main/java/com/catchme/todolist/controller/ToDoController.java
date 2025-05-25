@@ -29,4 +29,10 @@ public class ToDoController {
         return toDoService.getTodosByDate(date);
     }
 
+    @PutMapping
+    public ResponseEntity<ToDoEntity> updateTodo(@RequestBody ToDoDto dto) {
+        ToDoEntity updated = toDoService.updateTodo(dto);
+        return ResponseEntity.ok(updated);
+    }
+
 }
