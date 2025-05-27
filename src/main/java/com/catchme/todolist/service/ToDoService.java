@@ -31,13 +31,8 @@ public class ToDoService {
     }
 
     public List<ToDoDto> getTodosByDate(LocalDate date) {
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
-
-        List<ToDoEntity> todos = toDoRepository.findByStartDateBetweenAndIsDeletedFalse(startOfDay,
-                endOfDay);
+        List<ToDoEntity> todos = toDoRepository.findByStartDateAndIsDeletedFalse(date);
         return todos.stream().map(ToDoDto::fromEntity).collect(Collectors.toList());
-
     }
 //사용자가 입력하는 값은 dto.get으로 받음
 
@@ -59,6 +54,16 @@ public class ToDoService {
                         () -> new IllegalArgumentException("해당 할 일이 존재하지 않습니다. id=" + id));
 
         todo.softDelete();
+        toDoRepository.save(todo);
+    }
+
+    @Transactional //toDoRepository.save() 이런 코드를 쓰지 않아도 entity의 영속성을 이용하여 자동으로 저장되게 할 수 있도록 하는 애너테이션
+    public void toggleTodoCompletion(Long id) {
+        ToDoEntity todo = toDoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 할 일을 찾을 수 없습니다."));
+
+        todo.toggleCompletion();
+        toDoRepository.save(todo);
     }
 
 }

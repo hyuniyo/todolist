@@ -2,6 +2,7 @@ package com.catchme.todolist.entity;
 
 import com.catchme.todolist.common.BaseEntity;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import lombok.*;
 import java.time.LocalDateTime;
 import lombok.experimental.SuperBuilder;
@@ -20,10 +21,10 @@ public class ToDoEntity extends BaseEntity {
     // 최대 글자수 지정
 
     @Column(name = "start_date")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "due_date")
-    private LocalDateTime dueDate;
+    private LocalDate  dueDate;
 
     @Column(name = "is_completed", nullable = false)
     private Boolean isCompleted = false;
@@ -34,7 +35,7 @@ public class ToDoEntity extends BaseEntity {
     // 소프트 삭제용 필드. 삭제 시 DB에서 지우는 대신 true로 바꿈
     // 기본값 false로 설정
 
-    public void update(String title, LocalDateTime startDate, LocalDateTime dueDate) {
+    public void update(String title, LocalDate startDate, LocalDate dueDate) {
         this.title = title;
         this.startDate = startDate;
         this.dueDate = dueDate;
@@ -45,4 +46,7 @@ public class ToDoEntity extends BaseEntity {
     }
 
 
+    public void toggleCompletion() {
+        this.isCompleted = !this.isCompleted;
+    }
 }
