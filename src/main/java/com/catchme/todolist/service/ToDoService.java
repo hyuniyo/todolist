@@ -31,13 +31,8 @@ public class ToDoService {
     }
 
     public List<ToDoDto> getTodosByDate(LocalDate date) {
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
-
-        List<ToDoEntity> todos = toDoRepository.findByStartDateBetweenAndIsDeletedFalse(startOfDay,
-                endOfDay);
+        List<ToDoEntity> todos = toDoRepository.findByStartDateAndIsDeletedFalse(date);
         return todos.stream().map(ToDoDto::fromEntity).collect(Collectors.toList());
-
     }
 //사용자가 입력하는 값은 dto.get으로 받음
 

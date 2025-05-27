@@ -2,6 +2,7 @@ package com.catchme.todolist.dto;
 
 
 import com.catchme.todolist.entity.ToDoEntity;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,8 +18,8 @@ import lombok.Setter;
 public class ToDoDto {
     private Long id;
     private String title;
-    private LocalDateTime startDate;
-    private LocalDateTime dueDate;
+    private LocalDate startDate;
+    private LocalDate  dueDate;
     private Boolean isCompleted;
 
     public static ToDoDto fromEntity(ToDoEntity entity) {
